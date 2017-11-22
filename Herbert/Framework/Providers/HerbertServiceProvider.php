@@ -2,13 +2,14 @@
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Cookie\CookieJar;
-use Herbert\Framework\Session;
+
+//use Illuminate\Cookie\CookieJar;
 
 /**
  * @see http://getherbert.com
  */
-class HerbertServiceProvider extends ServiceProvider {
+class HerbertServiceProvider extends ServiceProvider
+{
 
     /**
      * Register the service provider.
@@ -23,7 +24,7 @@ class HerbertServiceProvider extends ServiceProvider {
             'env',
             defined('HERBERT_ENV') ? HERBERT_ENV
                 : (defined('WP_DEBUG') ? 'local'
-                    : 'production')
+                : 'production')
         );
 
         $this->app->instance(
@@ -108,8 +109,7 @@ class HerbertServiceProvider extends ServiceProvider {
 
         $this->app->singleton(
             'errors',
-            function ()
-            {
+            function () {
                 return session_flashed('__validation_errors', []);
             }
         );
@@ -134,8 +134,8 @@ class HerbertServiceProvider extends ServiceProvider {
             'database' => DB_NAME,
             'username' => DB_USER,
             'password' => DB_PASSWORD,
-            'charset' => DB_CHARSET,
-            'collation' => DB_COLLATE ?: $wpdb->collate,
+            'charset' => $wpdb->charset,
+            'collation' => $wpdb->collate,
             'prefix' => $wpdb->prefix
         ]);
 
