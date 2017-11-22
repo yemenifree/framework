@@ -239,10 +239,10 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
         }, $this->mismatched);
 
         $message = 'Unfortunately plugin(s) '
-                . implode(', ', $mismatched)
-                . ' can’t work with the following plugin(s) '
-                . implode(', ', $matched)
-                . '. Please disable and try updating all of the above plugins before reactivating.';
+            . implode(', ', $mismatched)
+            . ' can’t work with the following plugin(s) '
+            . implode(', ', $matched)
+            . '. Please disable and try updating all of the above plugins before reactivating.';
 
         Notifier::error($message);
     }
@@ -286,10 +286,6 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
 
         $this->loadPluginAPIs(
             array_get($config, 'apis', [])
-        );
-
-        $this->addPluginTwigNamespaces(
-            array_get($config, 'views', [])
         );
 
         $this->addPluginViewGlobals(
@@ -382,24 +378,6 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
         }
     }
 
-    /**
-     * Add all a plugin's twig namespaces.
-     *
-     * @param array $namespaces
-     * @return void
-     */
-    protected function addPluginTwigNamespaces($namespaces = [])
-    {
-        $loader = $this['twig.loader'];
-
-        foreach ($namespaces as $namespace => $paths)
-        {
-            foreach ((array) $paths as $path)
-            {
-                $loader->addPath($path, $namespace);
-            }
-        }
-    }
 
     /**
      * Add all a plugin's view globals.
