@@ -758,10 +758,6 @@ class Application extends \Illuminate\Container\Container implements \Illuminate
         $this->register($this->resolveProviderClass(
             'Herbert\Framework\Providers\HerbertServiceProvider'
         ));
-
-        $this->register($this->resolveProviderClass(
-            'Herbert\Framework\Providers\TwigServiceProvider'
-        ));
     }
 
     /**
